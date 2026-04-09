@@ -1,183 +1,213 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>🌸 お花畑 🌸</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 お花畑 🌸</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      min-height: 100vh;
-      background: linear-gradient(180deg, #ffe6f0 0%, #fff0f5 40%, #e8f5e9 70%, #c8e6c9 100%);
-      font-family: 'Segoe UI', 'Yu Gothic', sans-serif;
-      text-align: center;
-      overflow-x: hidden;
-      position: relative;
-    }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #ffe6f0 0%, #fff0f5 40%, #e8f5e9 70%, #c8e6c9 100%);
+            font-family: "Segoe UI", "Yu Gothic", sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    /* 花びらアニメーション */
-    .petal {
-      position: fixed;
-      top: -40px;
-      font-size: 24px;
-      animation: fall linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
+        .petal {
+            position: fixed;
+            top: -40px;
+            font-size: 24px;
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    @keyframes fall {
-      0%   { transform: translateY(-40px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; }
-    }
+        @keyframes fall {
+            0% {
+                transform: translateY(-40px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
 
-    .container {
-      position: relative;
-      z-index: 1;
-      padding: 60px 20px;
-    }
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 60px 20px;
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      color: #d81b60;
-      text-shadow: 2px 2px 4px rgba(216, 27, 96, 0.2);
-      margin-bottom: 16px;
-    }
+        h1 {
+            font-size: 2.5rem;
+            color: #d81b60;
+            text-shadow: 2px 2px 4px rgba(216, 27, 96, 0.2);
+            margin-bottom: 16px;
+        }
 
-    h1:first-child::before { content: '🌷 '; }
-    h1:first-child::after  { content: ' 🌷'; }
+        h1::before {
+            content: "🌷 ";
+        }
 
-    h2 {
-      font-size: 1.8rem;
-      color: #7b1fa2;
-      margin-bottom: 30px;
-    }
+        h1::after {
+            content: " 🌷";
+        }
 
-    h2::before { content: '🌻 '; }
-    h2::after  { content: ' 🌻'; }
+        h2 {
+            font-size: 1.8rem;
+            color: #7b1fa2;
+            margin-bottom: 30px;
+        }
 
-    .flower-btn {
-      background: linear-gradient(135deg, #f48fb1, #f06292, #ec407a);
-      color: #fff;
-      border: none;
-      padding: 18px 48px;
-      font-size: 1.3rem;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
+        h2::before {
+            content: "🌻 ";
+        }
 
-    .flower-btn:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 30px rgba(233, 30, 99, 0.5);
-      background: linear-gradient(135deg, #f06292, #ec407a, #e91e63);
-    }
+        h2::after {
+            content: " 🌻";
+        }
 
-    .flower-btn:active {
-      transform: translateY(1px) scale(0.98);
-    }
+        .flower-btn {
+            background: linear-gradient(135deg, #f48fb1, #f06292, #ec407a);
+            color: #fff;
+            border: none;
+            padding: 18px 48px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .flower-btn::before { content: '🌸 '; }
-    .flower-btn::after  { content: ' 🌸'; }
+        .flower-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.5);
+            background: linear-gradient(135deg, #f06292, #ec407a, #e91e63);
+        }
 
-    .response-box {
-      margin-top: 30px;
-      padding: 24px 36px;
-      background: rgba(255, 255, 255, 0.85);
-      border: 3px dashed #f48fb1;
-      border-radius: 20px;
-      display: inline-block;
-      font-size: 1.5rem;
-      color: #ad1457;
-      opacity: 0;
-      transform: scale(0.5);
-      transition: all 0.5s cubic-bezier(0.17, 0.67, 0.29, 1.27);
-    }
+        .flower-btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
 
-    .response-box.show {
-      opacity: 1;
-      transform: scale(1);
-    }
+        .flower-btn::before {
+            content: "🌸 ";
+        }
 
-    .link-area {
-      margin-top: 40px;
-    }
+        .flower-btn::after {
+            content: " 🌸";
+        }
 
-    .link-area a {
-      color: #7b1fa2;
-      font-size: 1.1rem;
-      text-decoration: none;
-      border-bottom: 2px dotted #ce93d8;
-      padding-bottom: 2px;
-      transition: color 0.3s;
-    }
+        .response-box {
+            margin-top: 30px;
+            padding: 24px 36px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 3px dashed #f48fb1;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 1.5rem;
+            color: #ad1457;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s cubic-bezier(0.17, 0.67, 0.29, 1.27);
+        }
 
-    .link-area a:hover {
-      color: #e91e63;
-      border-bottom-color: #f48fb1;
-    }
+        .response-box.show {
+            opacity: 1;
+            transform: scale(1);
+        }
 
-    .link-area a::before { content: '🌼 '; }
-    .link-area a::after  { content: ' 🌼'; }
+        .link-area {
+            margin-top: 40px;
+        }
 
-    /* 地面の花 */
-    .ground-flowers {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      font-size: 28px;
-      line-height: 1;
-      letter-spacing: 6px;
-      pointer-events: none;
-      z-index: 0;
-    }
-  </style>
+        .link-area a {
+            color: #7b1fa2;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-bottom: 2px dotted #ce93d8;
+            padding-bottom: 2px;
+            transition: color 0.3s;
+        }
+
+        .link-area a:hover {
+            color: #e91e63;
+            border-bottom-color: #f48fb1;
+        }
+
+        .link-area a::before {
+            content: "🌼 ";
+        }
+
+        .link-area a::after {
+            content: " 🌼";
+        }
+
+        .ground-flowers {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            font-size: 28px;
+            line-height: 1;
+            letter-spacing: 6px;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Hello Git</h1>
+        <h2>branch1の世界</h2>
 
-  <div class="container">
-    <h1>Hello Git</h1>
-    <h2>branch1の世界</h2>
+        <button class="flower-btn" onclick="onButtonClick()">テストボタン</button>
 
-    <button class="flower-btn" onclick="onButtonClick()">テストボタン</button>
+        <div id="response" class="response-box"></div>
 
-    <div id="response" class="response-box"></div>
-
-    <div class="link-area">
-      <a href="https://www.sunabaco.com" target="_blank">Sunabaco</a>
+        <div class="link-area">
+            <a href="https://www.sunabaco.com" target="_blank">Sunabaco</a>
+        </div>
     </div>
-  </div>
 
-  <div class="ground-flowers">🌸🌺🌻🌷🌹🌼💐🌸🌺🌻🌷🌹🌼💐🌸🌺🌻🌷🌹🌼💐🌸🌺🌻🌷🌹🌼💐</div>
+    <div class="ground-flowers">🌸🌺🌻🌷🌹🌼💐🌸🌺🌻🌷🌹🌼💐🌸🌺🌻🌷🌹🌼💐🌸🌺🌻🌷🌹🌼💐</div>
 
-  <script>
-    // 花びらを降らせる
-    const petals = ['🌸', '🌺', '💮', '🏵️', '🌷', '✿', '❀'];
-    function createPetal() {
-      const el = document.createElement('div');
-      el.classList.add('petal');
-      el.textContent = petals[Math.floor(Math.random() * petals.length)];
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.fontSize = (16 + Math.random() * 20) + 'px';
-      el.style.animationDuration = (4 + Math.random() * 6) + 's';
-      el.style.animationDelay = Math.random() * 2 + 's';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 12000);
-    }
-    setInterval(createPetal, 400);
+    <script>
+        const petals = ["🌸", "🌺", "💮", "🏵️", "🌷", "✿", "❀"];
 
-    // ボタンクリック時のレスポンス
-    function onButtonClick() {
-      const box = document.getElementById('response');
-      box.textContent = '🌺 あ～あ、おしちゃったね 🌺';
-      box.classList.remove('show');
-      // リフローを強制してアニメーションをリセット
-      void box.offsetWidth;
-      box.classList.add('show');
-    }
-  </script>
+        function createPetal() {
+            const el = document.createElement("div");
+            el.classList.add("petal");
+            el.textContent = petals[Math.floor(Math.random() * petals.length)];
+            el.style.left = Math.random() * 100 + "vw";
+            el.style.fontSize = 16 + Math.random() * 20 + "px";
+            el.style.animationDuration = 4 + Math.random() * 6 + "s";
+            el.style.animationDelay = Math.random() * 2 + "s";
+            document.body.appendChild(el);
+
+            setTimeout(() => {
+                el.remove();
+            }, 12000);
+        }
+
+        setInterval(createPetal, 400);
+
+        function onButtonClick() {
+            const box = document.getElementById("response");
+            box.textContent = "🌺 あ～あ、おしちゃったね 🌺";
+            box.classList.remove("show");
+            void box.offsetWidth;
+            box.classList.add("show");
+        }
+    </script>
 </body>
 </html>
