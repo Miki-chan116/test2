@@ -2,6 +2,34 @@
 <html>
 <head>
   <title>テスト</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+
+    .command-status {
+      margin-top: 24px;
+      padding: 16px;
+      border: 2px solid #222;
+      border-radius: 12px;
+      max-width: 480px;
+      background: #f6f6f6;
+    }
+
+    .command-status.is-active {
+      background: #ffe66d;
+      border-color: #c0392b;
+      color: #111;
+    }
+
+    .command-hint {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
   <h1>Hello Git</h1>
@@ -11,5 +39,49 @@
 <button>テストボタン</button>
 
   <a href="https://www.sunabaco.com" target="_blank">Sunabaco</a>
+
+  <section id="command-status" class="command-status">
+    <h2>隠しコマンド</h2>
+    <p id="command-message">コナミコマンド待機中</p>
+    <p class="command-hint">↑ ↑ ↓ ↓ ← → ← → B A を入力</p>
+  </section>
+
+  <script>
+    const konamiCode = [
+      'ArrowUp',
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowLeft',
+      'ArrowRight',
+      'b',
+      'a'
+    ];
+
+    const pressedKeys = [];
+    const commandStatus = document.getElementById('command-status');
+    const commandMessage = document.getElementById('command-message');
+
+    window.addEventListener('keydown', (event) => {
+      const normalizedKey = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+
+      pressedKeys.push(normalizedKey);
+
+      if (pressedKeys.length > konamiCode.length) {
+        pressedKeys.shift();
+      }
+
+      const isKonamiCommand = konamiCode.every((key, index) => pressedKeys[index] === key);
+
+      if (!isKonamiCommand) {
+        return;
+      }
+
+      commandStatus.classList.add('is-active');
+      commandMessage.textContent = 'コナミコマンドを認識しました';
+    });
+  </script>
 </body>
 </html>
